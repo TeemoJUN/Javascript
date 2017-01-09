@@ -21,10 +21,10 @@ function addLoadEvent(func) {
 */
 function getHTTPObject(){
 	if(typeof XMLHttpRequest == "undefined"){
-    //这个就是加的
-    XMLHttpRequest = function(){
-			return	new ActiveXObject("Microsoft.XMLHTTP");
-		}
+    	//这个就是加的
+    	XMLHttpRequest = function(){
+		return	new ActiveXObject("Microsoft.XMLHTTP");
+	}
 	}
 	return new XMLHttpRequest();
 }
