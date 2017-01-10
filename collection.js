@@ -28,3 +28,26 @@ function getHTTPObject(){
 	}
 	return new XMLHttpRequest();
 }
+/*
+*惰性加载入函数addEvenet被声明为一个不同函数，但在第一次进入函数后addEvent会被重写。
+*一次判断在也不用再进行判断
+*/
+
+var addEvent=function(elem,type,handler){
+	if(window.addEventListener){
+		addEvent=function(elem,type,handler){
+			elem.addEventListener(type,handler,false);
+		}
+	}
+	else if(window.attachEvent){
+		addEvent=function(elem,type,handler){
+			elem.attachevent("on"+type,handler);
+		}
+	}
+	addEvent(elem,type,handler);
+};
+
+
+
+
+
