@@ -66,7 +66,7 @@ var addEvent=function(elem,type,handler){
       document.webkitCancelFullScreen();
     }
   }
-})()；
+})();
 
 
 
