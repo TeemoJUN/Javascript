@@ -29,6 +29,19 @@ function getHTTPObject(){
 	return new XMLHttpRequest();
 }
 /*
+*  创建ajax和它的回掉函数
+*/
+function ajax(url,func){
+	var xhr=getHTTPObject();
+	
+	xhr.open("POST",url,true);
+	
+	xhr.onreadystatechange=func();
+	
+	xhr.send(null);
+}
+
+/*
 *惰性加载入函数addEvenet被声明为一个不同函数，但在第一次进入函数后addEvent会被重写。
 *一次判断在也不用再进行判断
 */
