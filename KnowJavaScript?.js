@@ -9,7 +9,7 @@
     bar:"Wan",
     foo:function(){
       console.log(Obj.bar);//"Wan"
-      console.log(bar)//"Eilc"
+      console.log(bar)//"Lin"
       console.log(this.bar)//"Wan"
     }
   }
