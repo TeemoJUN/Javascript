@@ -89,7 +89,7 @@ function log() {
   } 
   catch (e) {
     try {
-      opera.postError.apply(opera, argumrnts);//兼容opera
+      opera.postError.apply(opera, arguments);//兼容opera
     } 
     catch (e) {
       alert(Array.prototype.join.call(arguments, " "));
