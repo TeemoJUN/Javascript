@@ -88,9 +88,27 @@ console.log(a[b]);//456
 /*
 *因为b,c本身就是一个对象;所以a[b]和a[c]相当于a["object Object"];因此就相当与给a["object Object"]赋值
 */
+//..........................................................................................
+//.........5..................
+console.log(foo);
+function foo(){
 
+  console.log("函数提升");
+}
 
-
+var foo="as";
+/*
+*Output:foo()
+*
+*	function foo() {
+*  		console.log('函数提升');
+*	}
+*	var foo;
+*	console.log(foo);
+*	foo = 'as';
+*函数会优先提升，在是变量
+*
+*/
 
 
 
