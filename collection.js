@@ -81,6 +81,26 @@ var addEvent=function(elem,type,handler){
   }
 })();
 
+//测试log函数
+
+function log() {
+  try {
+    console.log.apply(console, arguments);
+  } 
+  catch (e) {
+    try {
+      opera.postError.apply(opera, argumrnts);//兼容opera
+    } 
+    catch (e) {
+      alert(Array.prototype.join.call(arguments, " "));
+    }
+  }
+}
+
+
+
+
+
 
 
 
