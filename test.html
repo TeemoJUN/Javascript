@@ -123,7 +123,9 @@
         
         
         tag("------------------------重载函数方法------------------------------------");
-
+        /*
+        *利用的是闭包，和fn.length为声明的参数的个数与arguments.length为传入的参数个数
+        */
         function addMethod(object,name,fn){
             var old=object[name];
             object[name]=function(){
