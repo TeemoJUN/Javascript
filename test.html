@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Test</title>
+        <meta charset="utf-8">
+        <script type="text/javascript">
+            function assert(value,desc){
+                var li=document.createElement("li");
+                li.className=value ? "pass":"fail";
+                li.appendChild(document.createTextNode(desc));
+                document.getElementById("results").appendChild(li);
+            }
+
+
+            function tag(title){
+                var li=document.createElement("li");
+                li.className="title";
+                li.appendChild(document.createTextNode(title));
+                document.getElementById("results").appendChild(li);
+            }
+        </script>
+        <style>
+            #results li.pass{
+                color:green;
+            }
+            #results li.fail{
+                color:red;
+            }
+            #results li.title{
+                color:darkcyan;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>测试成功就为绿色，不成功为红色</h1>
+        <ul id="results"></ul>
+
+        <input type="text" id="first" style="display: none;">
+        <input type="text" id="second" style="display: none;">
+    </body>
+
+    <script type="text/javascript">
+        tag("--------------------将对象整合到同一对象里------------------------")
+        //<将对象整合到同一对象里>
+        /*
+        *为什么从i=1开始呢？因为我们只需要将后面的对象属性整合到第一个里面去
+        */
+        function merge(root){
+            for(var i=1;i<arguments.length;i++){
+                for(var key in arguments[i]){
+                    root[key]=arguments[i][key];
+                }
+            }
+            return root;
+        }
+        var merged=merge({name:"we"},{city:"NanChang"});
+        assert(merged.name==="we","name在里面");
+        assert(merged.city=="BeiJing","city在里面是北京");
+        assert(merged.city=="NanChang","city在里面是南昌");
+        
+        tag("--------------------数组中的最大值,最小值---------------------------");
+       
+        //<数组中的最大值,最小值>
+        function smallest(array){
+            return Math.min.apply(Math,array);
+        }
+        function largest(array){
+            return Math.max.apply(Math,array);
+        }
+        assert(smallest([0,1,2,3,4])==0,"数组中min==0");
+        assert(largest([4,5,6,7,20])==20,"数组中max==20");
+        assert(largest([3,5,67,7,1])==2,"数组中max==2");
+
+        tag("-----------------arguments是类数组，但不是数组------------------------------");
+        
+        //<arguments是类数组，但不是数组>
+        /*
+        *multi==3,这是因为形参数量小于实参数
+        *本来应该是 return multi*Math.max.apply(Math,arguments.slice(1));
+        *但arguments没有slice方法，也就说明arguments是类数组，但不是数组
+        */
+        function multiMax(multi){
+            //console.log(multi);//3
+            return multi*Math.max.apply(Math,Array.prototype.slice.call(arguments,1));
+        }
+        assert(multiMax(3,1,2,4)==12,"3*4=12");
+        
+        tag("-------------------伪造数组----------------------------");
+
+        //<伪造数组>
+        /*
+        *我擦这个写法好棒啊，把elems变成了数组
+        *
+        */
+        var elems={
+            length:0,
+            
+            add:function(elem){
+                Array.prototype.push.call(this,elem);
+            },
+
+            gather:function(id){
+                this.add(document.getElementById(id));
+            }
+        };
+        elems.gather("first");
+        assert(elems.length==1 && elems[0].nodeType,"测试伪造数组1成功");
+        elems.gather("second");
+        assert(elems.length==2 && elems[1].nodeType,"测试伪造数组2成功");
+
+        tag("-------------------利用缓存DOM---提高性能---------------------------");
+        /*
+        *还可以缓存其它的
+        */
+        function getElements(id){
+            if(!getElements.cache){
+                getElements.cache={};
+            }
+            return getElements.cache[id]=getElements.cache[id]||document.getElementById(id);
+        }
+        getElements("first")
+        assert(document.getElementById("first")===getElements.cache["first"],"缓存成功");
+
+
+    </script>
+</html>
