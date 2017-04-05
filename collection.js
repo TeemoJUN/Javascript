@@ -97,7 +97,7 @@ function log() {
   }
 }
 
-//javascript 实现重载
+//javascript 实现重载----测试在test.html
  function addMethod(object,name,fn){
     var old=object[name];
     object[name]=function(){
@@ -110,7 +110,22 @@ function log() {
      }
  }
 
-       
+
+// 绑定事件-------------------------测试在test.html文件中
+//绑定addEventListener中绑定时this会指向标签，不会指向想要的对象
+ function bindEvent(context,name){
+     return function(){
+         return context[name].apply(context,arguments);
+     }
+ }
+
+
+
+
+
+
+
+
 
 
 
