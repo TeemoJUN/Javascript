@@ -121,6 +121,23 @@ function log() {
 
 
 
+//更优雅的上传
+var xhr = getHTTPObject();
+var formData = new FormData();
+var fileInput = document.getElementById("myFile");
+var file = fileInput.files[0];
+formdata.append('myFile', file);
+
+xhr.open("POST", "/upload.php");
+
+xhr.onload = function(){
+    if(this.status === 200){
+        //对请求成功的处理
+    }
+}
+
+xhr.send(formData);
+xhr = null;
 
 
 
